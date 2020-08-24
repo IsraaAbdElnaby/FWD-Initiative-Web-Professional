@@ -18,6 +18,7 @@
  * 
 */
 
+const sections = document.querySelectorAll('section');
 
 /**
  * End Global Variables
@@ -26,6 +27,17 @@
 */
 
 
+ //tests whether an element is in viewport or not
+ const inViewPort = (element) => {
+     let bounding = element.getBoundingClientRect();
+     return (
+         bounding.top >= 0 && bounding.left >=0 &&
+         bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+         bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+     );
+ }
+
+//console.log(inViewPort(sections[0]));
 
 /**
  * End Helper Functions
@@ -53,5 +65,4 @@
 // Scroll to section on link click
 
 // Set sections as active
-
 
