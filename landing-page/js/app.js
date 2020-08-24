@@ -19,7 +19,7 @@
 */
 
 const sections = document.querySelectorAll('section');
-
+const list = document.querySelector('#navbar__list');
 /**
  * End Global Variables
  * Start Helper Functions
@@ -47,7 +47,22 @@ const sections = document.querySelectorAll('section');
 
 // build the nav
 
+/*const menu = () => {
+    //list.innerHTML = 
+    sections.forEach (
+        (currentValue) => {
+           // <li><a class="menu__link" href="#section1">Section1</a>
 
+           
+        }
+    )
+}*/
+
+//const val = document.querySelectorAll('.menu__link');
+//const v = val[1];
+// v.addEventListener('click', function () {
+//     console.log(v.id);
+//    });
 // Add class 'active' to section when near top of viewport
 
 
@@ -59,6 +74,12 @@ const sections = document.querySelectorAll('section');
  * Begin Events
  * 
 */
+
+list.addEventListener('click', (event) => {
+    event.target.scrollTo({
+        behavior: "smooth"
+    });
+})
 
 // Build menu 
 
