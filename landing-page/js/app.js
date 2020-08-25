@@ -39,6 +39,9 @@ const inViewPort = (element) => {
     );
 }
 
+const callback = (section) => {
+    window.scrollTo (section.getBoundingClientRect().x, section.getBoundingClientRect().y);
+}
 //console.log(inViewPort(sections[0]));
 
 /**
@@ -104,11 +107,12 @@ const menu = () => {
 window.addEventListener("DOMContentLoaded", menu);
 
 list.addEventListener('click', (event) => {
-    //event.preventDefault();
+    event.preventDefault();
     //console.log(event.target);
-    event.target.scrollIntoView({
-        behavior: "smooth"
-    });
+    window.setInterval(callback(event.target));
+    // event.target.scrollIntoView({
+    //     behavior: "smooth"
+    // });
     //
 })
 
