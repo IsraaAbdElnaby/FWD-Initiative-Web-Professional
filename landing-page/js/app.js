@@ -40,7 +40,7 @@ const inViewPort = (element) => {
 }
 
 const callback = (section) => {
-    window.scrollTo (section.getBoundingClientRect().x, section.getBoundingClientRect().y);
+    window.scrollTo(section.getBoundingClientRect().x, section.getBoundingClientRect().y);
 }
 //console.log(inViewPort(sections[0]));
 
@@ -109,10 +109,15 @@ window.addEventListener("DOMContentLoaded", menu);
 list.addEventListener('click', (event) => {
     event.preventDefault();
     //console.log(event.target);
-    window.setInterval(callback(event.target));
-    // event.target.scrollIntoView({
-    //     behavior: "smooth"
-    // });
+    sections.forEach(section => {
+        if (("#" + section.id) === event.target.hash) {
+            section.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    })
+    //window.setInterval(callback(event.target));
+
     //
 })
 
