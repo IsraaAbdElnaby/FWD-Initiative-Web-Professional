@@ -47,16 +47,16 @@ const list = document.querySelector('#navbar__list');
 
 // build the nav
 
-/*const menu = () => {
-    //list.innerHTML = 
+const menu = () => {
     sections.forEach (
         (currentValue) => {
-           // <li><a class="menu__link" href="#section1">Section1</a>
-
-           
+            let data = currentValue.getAttribute('data-nav');
+            list.innerHTML += 
+                 "<li><a class = \"menu__link\" href = " + "#" + currentValue.id + ">" + data + "</a>" ;
         }
     )
-}*/
+}
+menu();
 
 //const val = document.querySelectorAll('.menu__link');
 //const v = val[1];
