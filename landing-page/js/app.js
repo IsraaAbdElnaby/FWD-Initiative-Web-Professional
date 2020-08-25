@@ -20,6 +20,8 @@
 
 const sections = document.querySelectorAll('section');
 const list = document.querySelector('#navbar__list');
+const collapse = document.querySelectorAll('.collapsible');
+console.log(collapse);
 /**
  * End Global Variables
  * Start Helper Functions
@@ -27,15 +29,15 @@ const list = document.querySelector('#navbar__list');
 */
 
 
- //tests whether an element is in viewport or not
- const inViewPort = (element) => {
-     let bounding = element.getBoundingClientRect();
-     return (
-         bounding.top >= 0 && bounding.left >=0 &&
-         bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-         bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
-     );
- }
+//tests whether an element is in viewport or not
+const inViewPort = (element) => {
+    let bounding = element.getBoundingClientRect();
+    return (
+        bounding.top >= 0 && bounding.left >= 0 &&
+        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
 
 //console.log(inViewPort(sections[0]));
 
@@ -47,12 +49,35 @@ const list = document.querySelector('#navbar__list');
 
 // build the nav
 
+const observer = new IntersectionObserver((entries) => {
+    console.log(entries);
+    entries.forEach(entry => {
+
+        if (entry.intersectionRatio > 0) {
+            entry.target.classList.add("landing__container");
+        }
+        else entry.target.classList.remove("your-active-class");
+        console.log(entry.className);
+
+
+    })
+}
+    , { threshold: 1 });
+
+sections.forEach(
+    (section) => {
+        //  console.log(section);
+        observer.observe(section);
+    }
+)
+
+
 const menu = () => {
-    sections.forEach (
+    sections.forEach(
         (currentValue) => {
             let data = currentValue.getAttribute('data-nav');
-            list.innerHTML += 
-                 "<li><a class = \"menu__link\" href = " + "#" + currentValue.id + ">" + data + "</a>" ;
+            list.innerHTML +=
+                "<li><a class = \"menu__link\" href = " + "#" + currentValue.id + ">" + data + "</a>";
         }
     )
 }
@@ -79,9 +104,25 @@ const menu = () => {
 window.addEventListener("DOMContentLoaded", menu);
 
 list.addEventListener('click', (event) => {
-    event.target.scrollTo({
+    //event.preventDefault();
+    //console.log(event.target);
+    event.target.scrollIntoView({
         behavior: "smooth"
     });
+    //
+})
+
+collapse.forEach((item) => {
+    item.addEventListener('click', () => {
+        //console.log(this);
+        item.classList.toggle("visible");
+        const sib = item.nextElementSibling;
+        if (sib.style.display === "none")
+            sib.style.display = "block";
+        else
+            sib.style.display = "none";
+
+    })
 })
 
 // Build menu 
