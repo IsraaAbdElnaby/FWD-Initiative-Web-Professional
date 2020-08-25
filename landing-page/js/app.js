@@ -56,7 +56,7 @@ const menu = () => {
         }
     )
 }
-menu();
+//menu();
 
 //const val = document.querySelectorAll('.menu__link');
 //const v = val[1];
@@ -74,6 +74,9 @@ menu();
  * Begin Events
  * 
 */
+
+//Build navigation when DOM content is fully loaded
+window.addEventListener("DOMContentLoaded", menu);
 
 list.addEventListener('click', (event) => {
     event.target.scrollTo({
