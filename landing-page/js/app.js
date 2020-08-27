@@ -22,12 +22,20 @@ const sections = document.querySelectorAll('section');
 const list = document.querySelector('#navbar__list');
 const collapse = document.querySelectorAll('.collapsible');
 const links  = document.getElementsByClassName('menu__link');
+const scrollBtn = document.querySelector('.scrollupbtn');
+const navBar = document.querySelector('.navbar__menu');
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
-
+const btnVisible = () => {
+    if (window.pageYOffset > 20 || document.documentElement.scrollTop > 20|| document.body.scrollTop > 20){
+       scrollBtn.style.display = "block";
+       console.log("visible");
+    }
+    else scrollBtn.style.display = "none";
+}
 
 /**
  * End Helper Functions
@@ -107,7 +115,7 @@ function setStyle (section) {
 */
 
 
-//Build navigation when DOM content is fully loaded
+//Build menu when DOM content is fully loaded
 window.addEventListener("DOMContentLoaded", menu);
 
 
@@ -141,15 +149,30 @@ collapse.forEach((item) => {
     })
 })
 
+// Set sections as active
 //change navbar link when section is currently in view
+let prevScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop ;
 window.addEventListener("scroll", () => {
+    btnVisible(); //change visibility of scroll up button
+
+    //Hide navbar while scrolling down
+    let curScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    if(curScrollTop > prevScrollTop) 
+        navBar.style.display = "none";
+    else
+        navBar.style.display = "block";
     sections.forEach (section => {
         setStyle(section);
     })
+
+    prevScrollTop = curScrollTop;
 })
-// Build menu 
+
+//Scroll to top
+scrollBtn.addEventListener("click", () => {
+    window.scrollTo({top: 0, behavior: "smooth"});
+})
 
 
 
-// Set sections as active
 
