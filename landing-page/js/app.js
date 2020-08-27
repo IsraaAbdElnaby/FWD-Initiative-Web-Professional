@@ -21,12 +21,58 @@
 const sections = document.querySelectorAll('section');
 const list = document.querySelector('#navbar__list');
 const collapse = document.querySelectorAll('.collapsible');
-console.log(collapse);
+const links  = document.getElementsByClassName('menu__link');
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
+
+
+/**
+ * End Helper Functions
+ * Begin Main Functions
+ * 
+*/
+
+
+
+// const observer = new IntersectionObserver((entries) => {
+//     //console.log(entries);
+//     entries.forEach(entry => {
+//         let index = parseInt(entry.target.id.substring(7)) - 1;
+//         if (entry.intersectionRatio > 0) {
+//             links[index].classList.add("active");
+//         }
+//         else links[index].className = links[index].classList.replace("/\bactive\b/g", "");
+        
+//         console.log(entry.target.id );
+//         console.log(index);
+//         //console.log(entry.target.className);
+       
+
+//     })
+// }
+//     , { threshold: 1 });
+
+// sections.forEach(
+//     (section) => {
+//         observer.observe(section);
+//     }
+// )
+
+
+
+// build the nav
+const menu = () => {
+    sections.forEach(
+        (currentValue) => {
+            let data = currentValue.getAttribute('data-nav');
+            list.innerHTML +=
+                "<li><a class = \"menu__link\" href = " + "#" + currentValue.id + ">" + data + "</a>";
+        }
+    )
+}
 
 
 //tests whether an element is in viewport or not
@@ -39,60 +85,17 @@ const inViewPort = (element) => {
     );
 }
 
-const callback = (section) => {
-    window.scrollTo(section.getBoundingClientRect().x, section.getBoundingClientRect().y);
-}
-//console.log(inViewPort(sections[0]));
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
-
-// build the nav
-
-const observer = new IntersectionObserver((entries) => {
-    console.log(entries);
-    entries.forEach(entry => {
-
-        if (entry.intersectionRatio > 0) {
-            entry.target.classList.add("landing__container");
-        }
-        else entry.target.classList.remove("your-active-class");
-        console.log(entry.className);
-
-
-    })
-}
-    , { threshold: 1 });
-
-sections.forEach(
-    (section) => {
-        //  console.log(section);
-        observer.observe(section);
-    }
-)
-
-
-const menu = () => {
-    sections.forEach(
-        (currentValue) => {
-            let data = currentValue.getAttribute('data-nav');
-            list.innerHTML +=
-                "<li><a class = \"menu__link\" href = " + "#" + currentValue.id + ">" + data + "</a>";
-        }
-    )
-}
-//menu();
-
-//const val = document.querySelectorAll('.menu__link');
-//const v = val[1];
-// v.addEventListener('click', function () {
-//     console.log(v.id);
-//    });
 // Add class 'active' to section when near top of viewport
+function setStyle (section) {
+    //calculate index of nav link 
+    let index = parseInt(section.id.substring(7)) - 1; 
+    
+    if(inViewPort(section))
+       links[index].classList.add("active");
+    else
+       links[index].classList.remove("active");
 
+}
 
 // Scroll to anchor ID using scrollTO event
 
@@ -103,12 +106,16 @@ const menu = () => {
  * 
 */
 
+
+
 //Build navigation when DOM content is fully loaded
 window.addEventListener("DOMContentLoaded", menu);
 
+
+// Scroll to section on link click
 list.addEventListener('click', (event) => {
-    event.preventDefault();
-    //console.log(event.target);
+    event.preventDefault(); //prevent default behaviour of scrolling to section directly by id
+
     sections.forEach(section => {
         if (("#" + section.id) === event.target.hash) {
             section.scrollIntoView({
@@ -116,14 +123,12 @@ list.addEventListener('click', (event) => {
             });
         }
     })
-    //window.setInterval(callback(event.target));
 
-    //
 })
 
+//event for collapsible items to ensure its functionality
 collapse.forEach((item) => {
     item.addEventListener('click', () => {
-        //console.log(this);
         item.classList.toggle("visible");
         const sib = item.nextElementSibling;
         if (sib.style.display === "none")
@@ -134,9 +139,15 @@ collapse.forEach((item) => {
     })
 })
 
+//change navbar link when section is currently in view
+window.addEventListener("scroll", () => {
+    sections.forEach (section => {
+        setStyle(section);
+    })
+})
 // Build menu 
 
-// Scroll to section on link click
+
 
 // Set sections as active
 
