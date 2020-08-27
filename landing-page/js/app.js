@@ -107,7 +107,6 @@ function setStyle (section) {
 */
 
 
-
 //Build navigation when DOM content is fully loaded
 window.addEventListener("DOMContentLoaded", menu);
 
@@ -129,12 +128,15 @@ list.addEventListener('click', (event) => {
 //event for collapsible items to ensure its functionality
 collapse.forEach((item) => {
     item.addEventListener('click', () => {
-        item.classList.toggle("visible");
         const sib = item.nextElementSibling;
-        if (sib.style.display === "none")
+        if (sib.style.display === "none") {
             sib.style.display = "block";
-        else
+            item.classList.add("visible");
+        }
+        else {
             sib.style.display = "none";
+            item.classList.remove("visible");
+        }
 
     })
 })
