@@ -17,7 +17,7 @@ body{
 }
 
 .holder{
-
+    /* display: flex; */
 }
 
 .entry{
@@ -41,7 +41,13 @@ body{
 }
 
 .headline {
-
+    
+    justify-content: center;
+    padding: 5px;
+    font-size: 30px;
+}
+.zip {
+    padding: 5px;
 }
 .title{
 
@@ -93,13 +99,15 @@ button:focus {
 }
 /* Style for Placeholder Text*/
 ::placeholder { /* Firefox, Chrome, Opera */ 
-    color: #f0d43a; 
+    color: gray; 
+    opacity: 50%;
     font-family: 'Oswald', sans-serif;
 
 } 
   
 :-ms-input-placeholder { /* Internet Explorer 10-11 */ 
     color: #f0d43a; 
+    
     font-family: 'Oswald', sans-serif;
 
 } 
