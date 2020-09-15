@@ -1,5 +1,5 @@
 # Weather Journal App
- - an app that a displays city temprature and feeling of user to screen.
+ - an app that displays a city temprature and feeling of user to screen.
 ## How it works
  - it takes city zip code and user feeling as inputs and returns all input as output.
 ## Implementation
