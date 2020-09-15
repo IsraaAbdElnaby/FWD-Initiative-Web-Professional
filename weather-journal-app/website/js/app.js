@@ -1,6 +1,3 @@
-// Personal API Key for OpenWeatherMap API
-const apiKey = "42b16aeaeaf48b898e3718186b714d7b";
-
 const baseUrl = "api.openweathermap.org/data/2.5/weather?zip=";
 let zipCode = document.getElementById("zip").value;
 const button = document.getElementById("generate");
