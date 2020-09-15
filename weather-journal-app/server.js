@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-
+const projectData = {};
 // Express to run server and routes
 const express = require("express");
 
@@ -24,8 +24,6 @@ app.use(express.static('website'));
 const port = 8000;
 // Spin up the server
 const server = app.listen(port, () => console.log("server running!"));
-
-// Callback to debug
 
 // Initialize all route with a callback function
 
