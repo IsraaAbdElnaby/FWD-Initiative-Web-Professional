@@ -26,8 +26,10 @@ const port = 8000;
 const server = app.listen(port, () => console.log("server running!"));
 
 // Initialize all route with a callback function
-
+app.get("/all", getAllData);
 // Callback function to complete GET '/all'
-
+function getAllData (req, res) {
+    res.send(projectData);
+}
 // Post Route
   
