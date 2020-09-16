@@ -7,6 +7,7 @@ const baseUrl = "http://api.openweathermap.org/data/2.5/weather?zip=";
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 console.log(newDate);
+
 const button = document.getElementById("generate");
 
 // Event listener to add function to existing HTML DOM element
@@ -20,7 +21,10 @@ function generate (g) {
     getAPIData(baseUrl, zipCode, apiKey)
     .then((data) => {
         postData('/inputFeeling', {temp: data.temp, date: newDate, feeling: feel});
-    });
+    })
+    .then (
+        updateUI()
+    );
 };
 
 /* Function to GET Web API Data*/
@@ -56,3 +60,15 @@ const postData = async (url = '', data = {}) => {
 
 
 /* Function to GET Project Data */
+const updateUI = async () => {
+    const req = await fetch("/all");
+
+    try {
+        const data = await req.json();
+        document.getElementById("date").innerHTML = data[0].date;
+        document.getElementById("temp").innerHTML = data[0].temp;
+        document.getElementById("content").innerHTML = data[0].content;
+    }catch (error) {
+        console.log(error);
+    }
+}
