@@ -35,8 +35,8 @@ function getAllData (req, res) {
 app.post('/inputFeeling', (req, res) => {
     console.log(req.body);
     inputData = {
-        temp: req.body.temp, 
         date: req.body.date,
+        temp: req.body.temp, 
         feeling: req.body.feeling
     }
     projectData.push(inputData);

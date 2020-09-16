@@ -20,7 +20,7 @@ function generate (g) {
     console.log(feel);
     getAPIData(baseUrl, zipCode, apiKey)
     .then((data) => {
-        postData('/inputFeeling', {temp: data.temp, date: newDate, feeling: feel});
+        postData('/inputFeeling', {date: newDate, temp: data.temp, feeling: feel});
     })
     .then (
         updateUI()
@@ -67,7 +67,7 @@ const updateUI = async () => {
         const data = await req.json();
         document.getElementById("date").innerHTML = data[0].date;
         document.getElementById("temp").innerHTML = data[0].temp;
-        document.getElementById("content").innerHTML = data[0].content;
+        document.getElementById("content").innerHTML = data[0].feeling;
     }catch (error) {
         console.log(error);
     }
