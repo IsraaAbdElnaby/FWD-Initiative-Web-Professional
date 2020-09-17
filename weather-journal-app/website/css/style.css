@@ -32,15 +32,15 @@ body{
 }
 
 #date{
-
+    padding: 5px;
 }
 
 #temp{
-
+    padding: 5px;
 }
 
 #content{
-
+    padding: 5px;
 }
 
 .headline {
@@ -55,6 +55,7 @@ body{
 }
 .title{
     grid-area: 5/1/5/1;
+    color: white;
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
