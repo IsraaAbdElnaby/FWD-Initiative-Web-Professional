@@ -6,7 +6,7 @@ const baseUrl = "http://api.openweathermap.org/data/2.5/weather?zip=";
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
-console.log(newDate);
+
 
 const button = document.getElementById("generate");
 
@@ -17,13 +17,13 @@ button.addEventListener('click', generate);
 function generate (g) {
     const zipCode = document.getElementById("zip").value;
     const feel = document.getElementById("feelings").value;
-    console.log(feel);
+    
     getAPIData(baseUrl, zipCode, apiKey)
     .then((data) => {
-        postData('/inputFeeling', {date: newDate, temp: data.temp, feeling: feel});
+        postData('/inputFeeling', {date: newDate, temp: data.main.temp, feeling: feel});
     })
     .then (
-        updateUI()
+        updateUI
     );
 };
 
